@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css?family=Ubuntu');
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Ubuntu", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+:root {
+  --font-size: calc(10px + 1vmin);
+  --color-light: #F1F7ED;
+  --color-medium: #C5D86D;
+  --color-dark: #1A1B41;
+  --font-dark: #54494B;
+}
+
+a {
+  text-decoration: none;
+  color: var(--color-dark);
+}
+
+.basic-label {
+  font-size: 20px;
+}
+
+.basic-input {
+  font-size: 16px;
+  width: 200px;
+  padding: 5px;
+}
+
+.basic-btn {
+  font-size: 1.1rem;
+  display: block;
+  padding: .5rem 1rem;
+  margin: 1rem auto;
+  background-color: var(--color-dark);
+  color: var(--color-light);
+  border: none;
+  font-weight: bolder;
+  cursor: pointer;
+}
+
+.outline-btn {
+  font-size: 1.1rem;
+  display: block;
+  padding: .5rem 1rem;
+  margin: 1rem auto;
+  background-color: transparent;
+  border: 2px solid var(--color-dark);
+  color: var(--color-dark);
+  font-weight: bolder;
+  cursor: pointer;
+}
+
+.text-btn {
+  font-size: 1.1rem;
+  display: block;
+  padding: .5rem 1rem;
+  margin: 1rem auto;
+  background-color: transparent;
+  color: var(--color-dark);
+  border: none;
+  font-weight: bolder;
+  cursor: pointer;
+}
