@@ -1,0 +1,8 @@
+.login-form {
+  max-width: 75rem;
+  margin: 0 auto 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
