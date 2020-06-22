@@ -3,6 +3,7 @@ import { Input, Label } from '../Form/Form'
 import AuthApiService from '../../services/auth-api-service'
 import UserContext from '../../contexts/UserContext'
 import Button from '../Button/Button'
+import './LoginForm.css'
 
 class LoginForm extends Component {
   static defaultProps = {
@@ -50,29 +51,31 @@ class LoginForm extends Component {
         <div role='alert'>
           {error && <p>{error}</p>}
         </div>
-        <div>
-          <Label htmlFor='login-username-input'>
+        <div className="form-field-container">
+          <Label className="basic-label" htmlFor='login-username-input'>
             Username
           </Label>
           <Input
+            className="basic-input"
             ref={this.firstInput}
             id='login-username-input'
             name='username'
             required
           />
         </div>
-        <div>
-          <Label htmlFor='login-password-input'>
+        <div className="form-field-container">
+          <Label className="basic-label" htmlFor='login-password-input'>
             Password
           </Label>
           <Input
+            className="basic-input"
             id='login-password-input'
             name='password'
             type='password'
             required
           />
         </div>
-        <Button type='submit'>
+        <Button className="basic-btn" type='submit'>
           Login
         </Button>
       </form>

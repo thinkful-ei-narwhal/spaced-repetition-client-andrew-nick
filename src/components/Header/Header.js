@@ -43,7 +43,7 @@ class Header extends Component {
       <header className="nav">
         <h1>
           <Link to='/'>
-            Spaced repetition
+            Spaced Repetition
           </Link>
         </h1>
         {TokenService.hasAuthToken()

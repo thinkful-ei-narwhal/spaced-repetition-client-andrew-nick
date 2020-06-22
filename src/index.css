@@ -10,11 +10,12 @@ body {
   font-family: "Ubuntu", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: var(--color-light);
 }
 
 :root {
   --font-size: calc(10px + 1vmin);
-  --color-light: #F1F7ED;
+  --color-light: papayawhip;
   --color-medium: #C5D86D;
   --color-dark: #1A1B41;
   --font-dark: #54494B;
@@ -69,4 +70,8 @@ a {
   border: none;
   font-weight: bolder;
   cursor: pointer;
+}
+
+.form-field-container {
+  margin: 2rem auto;
 }
