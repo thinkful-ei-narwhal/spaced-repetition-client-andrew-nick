@@ -12,7 +12,7 @@ class DashboardRoute extends Component {
   componentDidMount() {
     this.context.clearError()
     // retrieve words and scores
-    LanguageApiService.getWords()
+    LanguageApiService.getLanguage()
       .then(res => this.context.setWordList(res.words))
       // .then(res => this.context.setLanguage(res.language))
       .catch(err => this.context.setError(err))
