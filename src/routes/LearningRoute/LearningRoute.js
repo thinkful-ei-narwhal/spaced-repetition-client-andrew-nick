@@ -66,7 +66,6 @@ class LearningRoute extends Component {
         //update display to display feedback, congratulate of berate user and show correct answer
         //button for next word
         //display correct and incorrect word count
-        
         */}
         </section>
       </main>
