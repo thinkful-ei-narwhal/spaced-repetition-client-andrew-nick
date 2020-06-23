@@ -42,16 +42,22 @@ class DashboardRoute extends Component {
     
     return (
       <main>
-        <h2>Test language 1</h2>
-        <h3>Words To Practice</h3>
         <section>
-          { error
-            ? <p>There was and error, try again</p> 
-            : words ?
-            this.renderWordComponent()
-          : null}
+          <h2>{language.name}</h2>
+          <span>Total correct answers: {language.total_score}</span>
+          <h3>Words to practice</h3>
+          <section>
+            { error
+              ? <p>There was and error, try again</p> 
+              : words ?
+              this.renderWordComponent()
+            : null}
+          </section>
+          <a 
+            href='/learn'
+            className="outline-btn">Start practicing
+          </a>
         </section>
-        <button className="outline-btn">Start Practicing</button>
       </main>
     );
   }
