@@ -13,30 +13,33 @@ class DashboardRoute extends Component {
     this.context.clearError()
     // retrieve words and scores
     LanguageApiService.getLanguage()
-      .then(res => this.context.setWordList(res.words))
-      // .then(res => this.context.setLanguage(res.language))
+      .then(res => {
+        console.log(res)
+        this.context.setWordList(res.words);
+        this.context.setLanguage(res.language);
+        return res
+      })
       .catch(err => this.context.setError(err))
   }
 
   renderWordComponent() {
-    console.log(this.context.words);
-    
     const allWords = this.context.words.map((word, i) => (
       <li 
         key={i}
         className="word-card"
       >
         <h4 className="card-item">{word.original}</h4>
-        <p className="card-item">Total correct answers: {word.correct_count}</p>
-        <p className="card-item">Total incorrect answers: {word.incorrect_count}</p>
+        <p className="card-item">correct answer count: {word.correct_count}</p>
+        <p className="card-item">incorrect answer count: {word.incorrect_count}</p>
       </li>
     ))
-    console.log(allWords);
     return allWords
   }
 
   render() {
-    const { error, words } = this.context
+    const { error, words, language } = this.context
+    console.log(language);
+    
     return (
       <main>
         <h2>Test language 1</h2>

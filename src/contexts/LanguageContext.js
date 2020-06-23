@@ -54,12 +54,13 @@ export class LanguageProvider extends Component {
     const value = {
       authUser: this.state.authUser,
       words: this.state.words,
+      language: this.state.language,
       error: this.state.error,
       setUser: this.setUser,
       setError: this.setError,
       clearError: this.clearError,
       setWordList: this.setWordList,
-
+      setLanguage: this.setLanguage,
     }
     return (
       <LanguageContext.Provider value={value}>
