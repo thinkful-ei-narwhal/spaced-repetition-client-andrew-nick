@@ -40,6 +40,10 @@ export class LanguageProvider extends Component {
     this.setState({ language });
   };
 
+  setWordList = (words) => {
+    this.setState({ words })
+  }
+
   setError = (error) => {
     this.setState({ error });
   };
