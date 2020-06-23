@@ -8,6 +8,7 @@ class LearningRoute extends Component {
     super(props);
     this.state = {
       initialized: false,
+      asking: true,
     };
   }
 
@@ -29,12 +30,18 @@ class LearningRoute extends Component {
     );
   }
 
-  renderLearningPage() {
-    const { error, words, head, language } = this.context;
-    console.log("TESTING 1", head);
-    console.log("TESTING 2", words);
-    console.log("TESTING 3", language);
+  onSubmit(e) {
+    e.preventDefault();
+    console.log("TESTING", e.target.name.value);
 
+    //perform the GUESS POST AND FEED THAT DATA TO RENDER ANSWERS
+
+    e.target.name.value = "";
+    this.setState({ asking: false });
+  }
+
+  renderSubmitPage() {
+    const { error, words, head, language } = this.context;
     return (
       <main>
         <h2>Learning Page</h2>
@@ -45,8 +52,7 @@ class LearningRoute extends Component {
             <section>
               <p>Translate: {head.nextWord}</p>
               <p>Total score: {language.total_score}</p>
-              {/* TO DO: PUT IN AN EVENT HANDLER ON FORM */}
-              <form>
+              <form onSubmit={(e) => this.onSubmit(e)}>
                 <label className="basic-label">
                   Answer:{" "}
                   <input
@@ -59,21 +65,44 @@ class LearningRoute extends Component {
               </form>
             </section>
           ) : null}
+        </section>
+      </main>
+    );
+  }
 
-          {/* 
-        Part 2:
-        When user submits answer, resend request to back end POST /api/language/guess
-        //update display to display feedback, congratulate of berate user and show correct answer
-        //button for next word
-        //display correct and incorrect word count
-        */}
+  renderResultsPage() {
+    const { error, words, head, language } = this.context;
+    return (
+      <main>
+        <h2>Learning Page</h2>
+        <section>
+          {error ? (
+            <p>There was and error, try again</p>
+          ) : words ? (
+            <section>
+              <p>CORRECT OR INCORRECT</p>
+              <p>CORRECT ANSWER IF IT WAS INCORRECT</p>
+              <p>CORRECT COUNT ON WORD</p>
+              <p>INCORRECT COUNT ON WORD</p>
+              <button>NEXT QUESTION</button>
+            </section>
+          ) : null}
         </section>
       </main>
     );
   }
 
   render() {
-    return <> {this.state.initialized ? this.renderLearningPage() : null}</>;
+    return (
+      <>
+        {" "}
+        {this.state.initialized
+          ? this.state.asking
+            ? this.renderSubmitPage()
+            : this.renderResultsPage()
+          : null}
+      </>
+    );
   }
 }
 
