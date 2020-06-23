@@ -1,74 +1,65 @@
 import React, { Component } from 'react'
-import AuthApiService from '../services/auth-api-service'
-import TokenService from '../services/token-service'
-import IdleService from '../services/idle-service'
+// import AuthApiService from '../services/auth-api-service'
+// import TokenService from '../services/token-service'
 
 const LanguageContext = React.createContext({
-  user: {},
+  authUser: null,
+  language: {},
   words: [],
   error: null,
+  setUser: () => {},
+  clearUser: () => {},
   setError: () => {},
   clearError: () => {},
-  
+  setWordList: () => {},
+  setLanguage: () => {},
 })
 
 export default LanguageContext
 
 export class LanguageProvider extends Component {
-  constructor(props) {
-    super(props)
-    const state = { user: {}, error: null }
-
-    const jwtPayload = TokenService.parseAuthToken()
-
-    if (jwtPayload)
-      state.user = {
-        id: jwtPayload.user_id,
-        name: jwtPayload.name,
-        username: jwtPayload.sub,
-      }
-
-    this.state = state;
-    IdleService.setIdleCallback(this.logoutBecauseIdle)
-  }
-
-  componentDidMount() {
-    if (TokenService.hasAuthToken()) {
-      IdleService.registerIdleTimerResets()
-      TokenService.queueCallbackBeforeExpiry(() => {
-        this.fetchRefreshToken()
-      })
+    state = {
+      authUser: null,
+      language: {},
+      words: [],
+      error: null,
     }
-  }
 
-  componentWillUnmount() {
-    IdleService.unRegisterIdleResets()
-    TokenService.clearCallbackBeforeExpiry()
-  }
+    setUser = (authUser) => {
+      this.setState({ authUser })
+    }
 
-  setError = error => {
-    console.error(error)
-    this.setState({ error })
-  }
+    clearUser = (authUser) => {
+      this.setState({ authUser: null })
+    }
 
-  clearError = () => {
-    this.setState({ error: null })
-  }
+    setWordList = words => {
+      this.setState({ words })
+    }
 
-  setUser = user => {
-    this.setState({ user })
-  }
+    setLanguage = language => {
+      this.setState({ language })
+    }
 
+    setError = error => {
+      this.setState({ error })
+    }
 
-  // ***************** Need to figure out what I need in this context **********
- 
+    clearError = () => {
+      this.setState({ error: null })
+    }
+  
 
   render() {
     const value = {
-      user: this.state.user,
+      authUser: this.state.authUser,
+      words: this.state.words,
       error: this.state.error,
+      setUser: this.setUser,
       setError: this.setError,
       clearError: this.clearError,
+      setWordList: this.setWordList,
+
     }
     return (
       <LanguageContext.Provider value={value}>
