@@ -1,16 +1,14 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 // import { Link } from 'react-router-dom'
-import LanguageContext from '../../contexts/LanguageContext'
-import LanguageApiService from '../../services/language-api-service'
-import './DashboardRoute.css'
-
-
+import LanguageContext from "../../contexts/LanguageContext";
+import LanguageApiService from "../../services/language-api-service";
+import "./DashboardRoute.css";
 
 class DashboardRoute extends Component {
-  static contextType = LanguageContext
+  static contextType = LanguageContext;
 
   componentDidMount() {
-    this.context.clearError()
+    this.context.clearError();
     // retrieve words and scores
     LanguageApiService.getLanguage()
       .then(res => {
@@ -24,22 +22,20 @@ class DashboardRoute extends Component {
 
   renderWordComponent() {
     const allWords = this.context.words.map((word, i) => (
-      <li 
-        key={i}
-        className="word-card"
-      >
+      <li key={i} className="word-card">
         <h4 className="card-item">{word.original}</h4>
-        <p className="card-item">correct answer count: {word.correct_count}</p>
-        <p className="card-item">incorrect answer count: {word.incorrect_count}</p>
+        <p className="card-item">Total correct answers: {word.correct_count}</p>
+        <p className="card-item">
+          Total incorrect answers: {word.incorrect_count}
+        </p>
       </li>
-    ))
-    return allWords
+    ));
+    console.log(allWords);
+    return allWords;
   }
 
   render() {
-    const { error, words, language } = this.context
-    console.log(language);
-    
+    const { error, words,language } = this.context;
     return (
       <main>
         <section>
@@ -63,4 +59,4 @@ class DashboardRoute extends Component {
   }
 }
 
-export default DashboardRoute
+export default DashboardRoute;
