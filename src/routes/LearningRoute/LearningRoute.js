@@ -48,7 +48,7 @@ class LearningRoute extends Component {
               {/* TO DO: PUT IN AN EVENT HANDLER ON FORM */}
               <form>
                 <label className="basic-label">
-                  Name:{" "}
+                  Answer:{" "}
                   <input
                     className="basic-input"
                     type="text"
