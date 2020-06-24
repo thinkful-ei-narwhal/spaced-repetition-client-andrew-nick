@@ -37,35 +37,54 @@ class LearningRoute extends Component {
     const value = e.target.guessInput.value;
     e.target.guessInput.value = "";
     LanguageApiService.postGuess(value)
-      .then((res) => {
-        return this.context.setResults({
+      .then((res) =>
+        this.context.setResults({
           answer: res.answer,
           isCorrect: res.isCorrect,
           nextWord: res.nextWord,
           totalScore: res.totalScore,
           wordCorrectCount: res.wordCorrectCount,
           wordIncorrectCount: res.wordIncorrectCount,
-        });
-      })
+        })
+      )
       .catch((err) => this.context.setError(err));
   }
 
-  render() {
-    const { error, language } = this.context;
-    const showQuestion = this.context.isCorrect === null;
+  onRenderAnswer(head) {
     return (
       <>
+        <h2>Translate the word:</h2>
+        <span>{head.nextWord}</span>
+        <form onSubmit={(e) => this.props.onSubmit(e)}>
+          <label className="basic-label" for="learn-guess-input">
+            What's the translation for this word?
+          </label>
+          <input
+            required
+            className="basic-input"
+            type="text"
+            name="guessInput"
+            id="learn-guess-input"
+          />
+          <button className="submit-btn" type="submit" value="Submit">
+            Submit your answer
+          </button>
+        </form>
+      </>
+    );
+  }
+
+  render() {
+    const { error, language, head } = this.context;
+    const showQuestion = this.context.isCorrect === null;
+    return (
+      <main>
         <h1>Learning Page</h1>
         <section>
-          <p>Total score: {language.total_score}</p>
-          {showQuestion && !error && this.state.initialized && (
-            <Question onSubmit={this.onSubmit} />
-          )}
-          {!showQuestion && !error && (
-            <Answer />
-          )}
+          {showQuestion && <Question onSubmit={this.onSubmit} />}
+          {!showQuestion && <Answer />}
         </section>
-      </>
+      </main>
     );
   }
 }
