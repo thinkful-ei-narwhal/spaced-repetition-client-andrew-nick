@@ -9,15 +9,17 @@ class LearningRoute extends Component {
     this.state = {
       initialized: false,
       asking: true,
+      resultsMetadata: {},
     };
   }
 
   componentDidMount() {
     this.context.clearError();
 
-    const promise1 = LanguageApiService.getHead().then((res) =>
-      this.context.setHead(res)
-    );
+    const promise1 = LanguageApiService.getHead()
+      .then((res) => this.context.setHead(res))
+      .catch((err) => this.context.setError(err));
+
     const promise2 = LanguageApiService.getLanguage()
       .then((res) => {
         this.context.setWordList(res.words);
@@ -32,75 +34,96 @@ class LearningRoute extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-    console.log("TESTING", e.target.name.value);
-
-    //perform the GUESS POST AND FEED THAT DATA TO RENDER ANSWERS
-
-    e.target.name.value = "";
-    this.setState({ asking: false });
+    let resultsMetadata;
+    const value = e.target.guessInput.value;
+    e.target.guessInput.value = "";
+    LanguageApiService.postGuess(value)
+      .then((res) => {
+        resultsMetadata = {
+          answer: res.answer,
+          isCorrect: res.isCorrect,
+          nextWord: res.nextWord,
+          totalScore: res.totalScore,
+          wordCorrectCount: res.wordCorrectCount,
+          wordIncorrectCount: res.wordIncorrectCount,
+        };
+        return this.setState({ asking: false, resultsMetadata });
+      })
+      .catch((err) => this.context.setError(err));
   }
 
   renderSubmitPage() {
     const { error, words, head, language } = this.context;
     return (
-      <main>
-        <h2>Learning Page</h2>
-        <section>
-          {error ? (
-            <p>There was and error, try again</p>
-          ) : words ? (
-            <section>
-              <p>Translate: {head.nextWord}</p>
-              <p>Total score: {language.total_score}</p>
-              <form onSubmit={(e) => this.onSubmit(e)}>
-                <label className="basic-label">
-                  Answer:{" "}
-                  <input
-                    className="basic-input"
-                    type="text"
-                    name="learn-guess-input"
-                  />
-                </label>
-                <input className="submit-btn" type="submit" value="Submit" />
-              </form>
-            </section>
-          ) : null}
-        </section>
-      </main>
+      <section>
+        {error ? (
+          <p>There was and error, try again</p>
+        ) : words ? (
+          <section>
+            <p>Translate: {head.nextWord}</p>
+            <p>Total score: {language.total_score}</p>
+            <form onSubmit={(e) => this.onSubmit(e)}>
+              <label className="basic-label">
+                Answer:{" "}
+                <input
+                  className="basic-input"
+                  type="text"
+                  name="guessInput"
+                  id="learn-guess-input"
+                />
+              </label>
+              <input className="submit-btn" type="submit" value="Submit" />
+            </form>
+          </section>
+        ) : null}
+      </section>
     );
   }
 
   renderResultsPage() {
-    const { error, words, head, language } = this.context;
+    const { error } = this.context;
     return (
-      <main>
-        <h2>Learning Page</h2>
-        <section>
-          {error ? (
-            <p>There was and error, try again</p>
-          ) : words ? (
-            <section>
-              <p>CORRECT OR INCORRECT</p>
-              <p>CORRECT ANSWER IF IT WAS INCORRECT</p>
-              <p>CORRECT COUNT ON WORD</p>
-              <p>INCORRECT COUNT ON WORD</p>
-              <button>NEXT QUESTION</button>
-            </section>
-          ) : null}
-        </section>
-      </main>
+      <section>
+        {error ? (
+          <p>There was and error, try again</p>
+        ) : this.state.resultsMetadata ? (
+          <section>
+            {this.state.resultsMetadata.isCorrect ? (
+              <h1>Correct!</h1>
+            ) : (
+              <>
+                <h1>Incorrect :(</h1>
+                <p>The answer was: {this.state.resultsMetadata.answer}</p>
+              </>
+            )}
+
+            <button>Next Question</button>
+            <h2>Upcoming word: {this.state.resultsMetadata.nextWord}</h2>
+            <p>Word stats: </p>
+            <p>
+              Word correct count: {this.state.resultsMetadata.wordCorrectCount}
+            </p>
+            <p>
+              Word incorrect count:{" "}
+              {this.state.resultsMetadata.wordIncorrectCount}
+            </p>
+          </section>
+        ) : null}
+      </section>
     );
   }
 
   render() {
     return (
       <>
-        {" "}
-        {this.state.initialized
-          ? this.state.asking
-            ? this.renderSubmitPage()
-            : this.renderResultsPage()
-          : null}
+        <main>
+          <h2>Learning Page</h2>
+          {this.state.initialized
+            ? this.state.asking
+              ? this.renderSubmitPage()
+              : this.renderResultsPage()
+            : null}
+        </main>
       </>
     );
   }
