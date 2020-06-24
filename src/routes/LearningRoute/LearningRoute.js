@@ -10,7 +10,6 @@ class LearningRoute extends Component {
     super(props);
     this.state = {
       initialized: false,
-      asking: true,
     };
   }
 
@@ -35,12 +34,11 @@ class LearningRoute extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-    let resultsMetadata;
     const value = e.target.guessInput.value;
     e.target.guessInput.value = "";
     LanguageApiService.postGuess(value)
       .then((res) => {
-        this.context.setResults({
+        return this.context.setResults({
           answer: res.answer,
           isCorrect: res.isCorrect,
           nextWord: res.nextWord,
@@ -48,67 +46,9 @@ class LearningRoute extends Component {
           wordCorrectCount: res.wordCorrectCount,
           wordIncorrectCount: res.wordIncorrectCount,
         });
-        return this.setState({ asking: false });
       })
       .catch((err) => this.context.setError(err));
   }
-
-  // renderSubmitPage() {
-  //   const { error, words, head, language } = this.context;
-  //   return (
-  //     <section>
-  //       {error ? (
-  //         <p>There was and error, try again</p>
-  //       ) : words ? (
-  //         <section>
-  //           <h2>
-  //             Translate the word:{" "}
-  //             {this.state.initialized ? head.nextWord : null}
-  //           </h2>
-  //           <p>
-  //             Total score:{" "}
-  //             {this.state.initialized ? language.total_score : null}
-  //           </p>
-  //           <form onSubmit={(e) => this.onSubmit(e)}>
-  //             <label className="basic-label">
-  //               Answer:{" "}
-  //               <input
-  //                 className="basic-input"
-  //                 type="text"
-  //                 name="guessInput"
-  //                 id="learn-guess-input"
-  //               />
-  //             </label>
-  //             <input className="submit-btn" type="submit" value="Submit" />
-  //           </form>
-  //         </section>
-  //       ) : null}
-  //     </section>
-  //   );
-  // }
-
-  // renderResultsPage() {
-  //   return (
-  //     <section>
-  //       {this.state.resultsMetadata.isCorrect ? (
-  //         <h1>Correct!</h1>
-  //       ) : (
-  //         <>
-  //           <h1>Incorrect :(</h1>
-  //           <p>The answer was: {this.state.resultsMetadata.answer}</p>
-  //         </>
-  //       )}
-
-  //       <button>Next Question</button>
-  //       <h2>Upcoming word: {this.state.resultsMetadata.nextWord}</h2>
-  //       <p>Word stats: </p>
-  //       <p>Word correct count: {this.state.resultsMetadata.wordCorrectCount}</p>
-  //       <p>
-  //         Word incorrect count: {this.state.resultsMetadata.wordIncorrectCount}
-  //       </p>
-  //     </section>
-  //   );
-  // }
 
   render() {
     const { error, language } = this.context;
@@ -122,7 +62,7 @@ class LearningRoute extends Component {
             <Question onSubmit={this.onSubmit} />
           )}
           {!showQuestion && !error && (
-            <Answer resultsMetadata={this.state.resultsMetadata} />
+            <Answer />
           )}
         </section>
       </>

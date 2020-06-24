@@ -6,7 +6,6 @@ const LanguageContext = React.createContext({
   authUser: null,
   language: {},
   words: [],
-  error: null,
   head: {},
   isCorrect: null,
   totalScore: 0,
@@ -24,6 +23,7 @@ const LanguageContext = React.createContext({
   setWordList: () => {},
   setLanguage: () => {},
   setHead: () => {},
+  setResults: () => {},
 });
 
 export default LanguageContext;
@@ -33,20 +33,21 @@ export class LanguageProvider extends Component {
     authUser: null,
     language: {},
     words: [],
-    error: null,
     head: {},
-    isCorrect: null,
     totalScore: 0,
+    isCorrect: null,
     wordCorrectCount: 0,
     wordIncorrectCount: 0,
     nextWord: null,
     guess: null,
     prevWord: null,
     answer: null,
+    error: null,
   };
 
   setResults = (results) => {
-    this.setState(...results);
+    console.log("TESTING", results);
+    this.setState(results);
   };
 
   setIsCorrect = (isCorrect) => {
