@@ -8,6 +8,7 @@ const LanguageContext = React.createContext({
   words: [],
   error: null,
   head: {},
+  isCorrect: null,
   setUser: () => {},
   clearUser: () => {},
   setError: () => {},
@@ -26,6 +27,11 @@ export class LanguageProvider extends Component {
     words: [],
     error: null,
     head: {},
+    isCorrect: null,
+  };
+
+  setIsCorrect = (isCorrect) => {
+    this.setState({ isCorrect });
   };
 
   setUser = (authUser) => {
@@ -63,6 +69,8 @@ export class LanguageProvider extends Component {
       language: this.state.language,
       error: this.state.error,
       head: this.state.head,
+      isCorrect: this.state.isCorrect,
+      setIsCorrect: this.setIsCorrect,
       setUser: this.setUser,
       setError: this.setError,
       clearError: this.clearError,
