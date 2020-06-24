@@ -11,7 +11,6 @@ class LearningRoute extends Component {
     this.state = {
       initialized: false,
       asking: true,
-      resultsMetadata: {},
     };
   }
 
@@ -41,15 +40,15 @@ class LearningRoute extends Component {
     e.target.guessInput.value = "";
     LanguageApiService.postGuess(value)
       .then((res) => {
-        resultsMetadata = {
+        this.context.setResults({
           answer: res.answer,
           isCorrect: res.isCorrect,
           nextWord: res.nextWord,
           totalScore: res.totalScore,
           wordCorrectCount: res.wordCorrectCount,
           wordIncorrectCount: res.wordIncorrectCount,
-        };
-        return this.setState({ asking: false, resultsMetadata });
+        });
+        return this.setState({ asking: false });
       })
       .catch((err) => this.context.setError(err));
   }

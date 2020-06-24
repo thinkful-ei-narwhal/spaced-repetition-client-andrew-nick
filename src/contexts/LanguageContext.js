@@ -9,6 +9,14 @@ const LanguageContext = React.createContext({
   error: null,
   head: {},
   isCorrect: null,
+  totalScore: 0,
+  wordCorrectCount: 0,
+  wordIncorrectCount: 0,
+  nextWord: null,
+  guess: null,
+  prevWord: null,
+  answer: null,
+  error: null,
   setUser: () => {},
   clearUser: () => {},
   setError: () => {},
@@ -28,6 +36,17 @@ export class LanguageProvider extends Component {
     error: null,
     head: {},
     isCorrect: null,
+    totalScore: 0,
+    wordCorrectCount: 0,
+    wordIncorrectCount: 0,
+    nextWord: null,
+    guess: null,
+    prevWord: null,
+    answer: null,
+  };
+
+  setResults = (results) => {
+    this.setState(...results);
   };
 
   setIsCorrect = (isCorrect) => {
@@ -47,8 +66,8 @@ export class LanguageProvider extends Component {
   };
 
   setWordList = (words) => {
-    this.setState({ words })
-  }
+    this.setState({ words });
+  };
 
   setError = (error) => {
     this.setState({ error });
@@ -70,6 +89,13 @@ export class LanguageProvider extends Component {
       error: this.state.error,
       head: this.state.head,
       isCorrect: this.state.isCorrect,
+      totalScore: this.state.totalScore,
+      wordCorrectCount: this.state.wordCorrectCount,
+      wordIncorrectCount: this.state.wordIncorrectCount,
+      nextWord: this.state.nextWord,
+      guess: this.state.guess,
+      prevWord: this.state.prevWord,
+      answer: this.state.answer,
       setIsCorrect: this.setIsCorrect,
       setUser: this.setUser,
       setError: this.setError,
@@ -77,6 +103,7 @@ export class LanguageProvider extends Component {
       setWordList: this.setWordList,
       setLanguage: this.setLanguage,
       setHead: this.setHead,
+      setResults: this.setResults,
     };
     return (
       <LanguageContext.Provider value={value}>
