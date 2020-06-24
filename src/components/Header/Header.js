@@ -15,9 +15,9 @@ class Header extends Component {
     return (
       <div>
         <span>
-          {this.context.user.name}
+          Welcome {this.context.user.name}!
         </span>
-        <nav className="nav-links">
+        <nav className="nav-links outline-btn">
           <Link
             onClick={this.handleLogoutClick}
             to='/login'>
