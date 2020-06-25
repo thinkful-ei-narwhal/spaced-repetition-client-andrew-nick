@@ -7,9 +7,6 @@ class Answer extends Component {
   render() {
     return (
       <section>
-        <div className="DisplayScore">
-          <p>Your total score is: {this.context.totalScore}</p>
-        </div>
         <div className="DisplayFeedback">
           <p>
             The correct translation for {this.context.prevWord} was{" "}

@@ -27,7 +27,7 @@ class LearningRoute extends Component {
         context.setWordIncorrectCount(res.wordIncorrectCount);
         return;
       })
-      .catch((err) => this.context.setError(err));
+      .catch((err) => context.setError(err.error));
   }
 
   getNextWord(context, history) {
@@ -46,17 +46,20 @@ class LearningRoute extends Component {
           TokenService.clearAuthToken();
           history.push("/login");
         }
-        context.setError(error);
+        context.setError(error.error);
       });
   }
 
   render() {
     const { error } = this.context;
-    const showQuestion = this.context.isCorrect === null; //potential issue because context isn't reset
+    const showQuestion = this.context.isCorrect === null;
     return (
       <main>
         <h1>Learning Page</h1>
         <section>
+          <div className="DisplayScore">
+            <p>Your total score is: {this.context.totalScore}</p>
+          </div>
           {showQuestion && !error && <Question onSubmit={this.onSubmit} />}
           {!showQuestion && !error && (
             <Answer
