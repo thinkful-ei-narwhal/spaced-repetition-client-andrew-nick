@@ -47,6 +47,27 @@ class LearningRoute extends Component {
       .catch((err) => this.context.setError(err));
   }
 
+  onNextQuestion(context, history) {
+    context.reset();
+
+    LanguageApiService.getHead()
+      .then((head) => {
+        console.log("TESTING", head);
+        context.setTotalScore(head.totalScore);
+        context.setWordCorrectCount(head.wordCorrectCount);
+        context.setWordIncorrectCount(head.wordIncorrectCount);
+        context.setNextWord(head.nextWord);
+        context.setPrevWord(head.nextWord);
+      })
+      .catch((error) => {
+        if (error.error === "Unauthorized request") {
+          TokenService.clearAuthToken();
+          history.push("/login");
+        }
+        context.setError(error);
+      });
+  }
+
   render() {
     const { error } = this.context;
     const showQuestion = this.context.isCorrect === null; //potential issue because context isn't reset
@@ -55,7 +76,7 @@ class LearningRoute extends Component {
         <h1>Learning Page</h1>
         <section>
           {showQuestion && !error && <Question onSubmit={this.onSubmit} />}
-          {!showQuestion && !error && <Answer />}
+          {!showQuestion && !error && <Answer onNextQuestion={this.onNextQuestion} history={this.props.history} />}
         </section>
       </main>
     );

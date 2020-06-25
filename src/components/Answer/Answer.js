@@ -26,7 +26,11 @@ class Answer extends Component {
           </>
         )}
 
-        <button>Try another word!</button>
+        <button
+          onClick={() => this.props.onNextQuestion(this.context, this.props.history)}
+        >
+          Try another word!
+        </button>
         <h3>Upcoming word: {this.context.nextWord}</h3>
         <p>Word stats: </p>
         <p>Word correct count: {this.context.wordCorrectCount}</p>
