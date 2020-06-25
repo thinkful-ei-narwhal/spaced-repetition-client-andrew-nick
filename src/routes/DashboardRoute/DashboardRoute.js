@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-// import { Link } from 'react-router-dom'
 import LanguageContext from "../../contexts/LanguageContext";
 import LanguageApiService from "../../services/language-api-service";
 import "./DashboardRoute.css";
@@ -35,7 +34,7 @@ class DashboardRoute extends Component {
   }
 
   render() {
-    const { error, words,language } = this.context;
+    const { error, words, language } = this.context;
     return (
       <main>
         <section>

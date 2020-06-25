@@ -25,7 +25,8 @@ const LanguageApiService = {
   //POST guess
   postGuess(guess) {
     // const { guess } = req.body;
-
+    console.log(guess);
+    
     return fetch(`${config.API_ENDPOINT}/language/guess`, {
       method: "POST",
       headers: {

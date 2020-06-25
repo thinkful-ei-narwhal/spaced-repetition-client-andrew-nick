@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import LanguageContext from "../../contexts/LanguageContext";
+import LearningContext from "../../contexts/LearningContext";
 import "./Question.css";
 
 class Question extends Component {
-  static contextType = LanguageContext;
+  static contextType = LearningContext;
   render() {
     const { head, language } = this.context;
     return (
