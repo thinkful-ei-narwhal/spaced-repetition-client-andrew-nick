@@ -13,10 +13,12 @@ class LearningRoute extends Component {
 
     LanguageApiService.getHead()
       .then((head) => {
+        console.log("TESTING", head);
         this.context.setTotalScore(head.totalScore);
         this.context.setWordCorrectCount(head.wordCorrectCount);
         this.context.setWordIncorrectCount(head.wordIncorrectCount);
         this.context.setNextWord(head.nextWord);
+        this.context.setPrevWord(head.nextWord);
       })
       .catch((error) => {
         if (error.error === "Unauthorized request") {
@@ -33,6 +35,7 @@ class LearningRoute extends Component {
     e.target.guessInput.value = "";
     LanguageApiService.postGuess(value)
       .then((res) => {
+        context.setGuess(value);
         context.setAnswer(res.answer);
         context.setIsCorrect(res.isCorrect);
         context.setNextWord(res.nextWord);
@@ -51,7 +54,6 @@ class LearningRoute extends Component {
       <main>
         <h1>Learning Page</h1>
         <section>
-          <p>Your total score is: {this.context.totalScore}</p>
           {showQuestion && !error && <Question onSubmit={this.onSubmit} />}
           {!showQuestion && !error && <Answer />}
         </section>

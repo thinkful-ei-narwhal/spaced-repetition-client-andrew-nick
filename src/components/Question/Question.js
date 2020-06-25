@@ -7,6 +7,7 @@ class Question extends Component {
   render() {
     return (
       <>
+        <p>Your total score is: {this.context.totalScore}</p>
         <h2>Translate the word:</h2>
         <span>{this.context.nextWord}</span>
         <form onSubmit={(e) => this.props.onSubmit(e, this.context)}>
