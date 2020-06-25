@@ -19,6 +19,7 @@ class Question extends Component {
             type="text"
             name="guessInput"
             id="learn-guess-input"
+            autocomplete="off"
           />
 
           <p>
@@ -29,7 +30,7 @@ class Question extends Component {
             You have answered this word incorrectly{" "}
             {this.context.wordIncorrectCount} times.
           </p>
-          <button className="submit-btn" type="submit" value="Submit">
+          <button className="submit-btn basic-btn" type="submit" value="Submit">
             Submit your answer
           </button>
         </form>

@@ -4,6 +4,7 @@ import LanguageApiService from "../../services/language-api-service";
 import Question from "../../components/Question/Question";
 import Answer from "../../components/Answer/Answer";
 import TokenService from "../../services/token-service";
+import './LearningRoute.css'
 
 class LearningRoute extends Component {
   static contextType = LearningContext;
@@ -57,7 +58,7 @@ class LearningRoute extends Component {
     console.log(this.context.totalScore);
     
     return (
-      <main>
+      <main className="learning-page">
         <h1>Learning Page</h1>
         <section>
           <div className="DisplayScore">

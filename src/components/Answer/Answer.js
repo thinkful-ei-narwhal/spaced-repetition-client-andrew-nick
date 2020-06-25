@@ -20,7 +20,7 @@ class Answer extends Component {
             <h2>Good try, but not quite right :(</h2>
         )}
         <p>The answer was: {this.context.answer}</p>
-        <button
+        <button className="basic-btn"
           onClick={() => this.props.onNextQuestion(this.context, this.props.history)}
         >
           Try another word!

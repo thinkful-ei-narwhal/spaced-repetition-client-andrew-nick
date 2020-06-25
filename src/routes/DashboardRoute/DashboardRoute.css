@@ -12,3 +12,15 @@
   margin: .5rem;
   padding: 0;
 }
+
+.start-practice {
+  text-align: center;
+}
+
+.incorrect-count {
+  color: red;
+}
+
+.correct-count {
+  color: green;
+}

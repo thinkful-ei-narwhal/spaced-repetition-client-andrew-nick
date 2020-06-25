@@ -23,8 +23,8 @@ class DashboardRoute extends Component {
     const allWords = this.context.words.map((word, i) => (
       <li key={i} className="word-card">
         <h4 className="card-item">{word.original}</h4>
-        <p className="card-item">correct answer count: {word.correct_count}</p>
-        <p className="card-item">
+        <p className="card-item correct-count">correct answer count: {word.correct_count}</p>
+        <p className="card-item incorrect-count">
           incorrect answer count: {word.incorrect_count}
         </p>
       </li>
@@ -50,7 +50,7 @@ class DashboardRoute extends Component {
           </section>
           <a 
             href='/learn'
-            className="outline-btn">Start practicing
+            className="basic-btn start-practice">Start practicing
           </a>
         </section>
       </main>

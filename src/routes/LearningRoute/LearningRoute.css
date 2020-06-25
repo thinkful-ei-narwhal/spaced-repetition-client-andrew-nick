@@ -1,0 +1,9 @@
+.learning-page {
+  border: 1px solid var(--color-dark);
+  padding: .5rem;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
