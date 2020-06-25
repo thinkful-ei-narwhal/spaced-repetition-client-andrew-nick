@@ -18,6 +18,7 @@ class LearningRoute extends Component {
     e.target.guessInput.value = "";
     LanguageApiService.postGuess(value)
       .then((res) => {
+        console.log(res)
         context.setGuess(value);
         context.setAnswer(res.answer);
         context.setIsCorrect(res.isCorrect);
@@ -53,12 +54,14 @@ class LearningRoute extends Component {
   render() {
     const { error } = this.context;
     const showQuestion = this.context.isCorrect === null;
+    console.log(this.context.totalScore);
+    
     return (
       <main>
         <h1>Learning Page</h1>
         <section>
           <div className="DisplayScore">
-            <p>Your total score is: {this.context.totalScore}</p>
+            <p>Your total score is: <span>{this.context.totalScore}</span></p>
           </div>
           {showQuestion && !error && <Question onSubmit={this.onSubmit} />}
           {!showQuestion && !error && (

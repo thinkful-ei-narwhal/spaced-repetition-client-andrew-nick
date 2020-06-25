@@ -17,12 +17,9 @@ class Answer extends Component {
         {this.context.isCorrect ? (
           <h2>You were correct! :D</h2>
         ) : (
-          <>
             <h2>Good try, but not quite right :(</h2>
-            <p>The answer was: {this.context.answer}</p>
-          </>
         )}
-
+        <p>The answer was: {this.context.answer}</p>
         <button
           onClick={() => this.props.onNextQuestion(this.context, this.props.history)}
         >
