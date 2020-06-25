@@ -5,23 +5,14 @@ import "./Question.css";
 class Question extends Component {
   static contextType = LearningContext;
   render() {
-    const { head, language } = this.context;
     return (
       <>
-        <p>Your total score is: {language.total_score}</p>
         <h2>Translate the word:</h2>
-        <span>{head.nextWord}</span>
-        <form onSubmit={(e) => this.props.onSubmit(e)}>
-          <label className="basic-label" for="learn-guess-input">
+        <span>{this.context.nextWord}</span>
+        <form onSubmit={(e) => this.props.onSubmit(e, this.context)}>
+          <label className="basic-label" htmlFor="learn-guess-input">
             What's the translation for this word?
           </label>
-          <p>
-            You have answered this word correctly {head.wordCorrectCount} times.
-          </p>
-          <p>
-            You have answered this word incorrectly {head.wordIncorrectCount}{" "}
-            times.
-          </p>
           <input
             required
             className="basic-input"
@@ -29,6 +20,15 @@ class Question extends Component {
             name="guessInput"
             id="learn-guess-input"
           />
+
+          <p>
+            You have answered this word correctly{" "}
+            {this.context.wordCorrectCount} times.
+          </p>
+          <p>
+            You have answered this word incorrectly{" "}
+            {this.context.wordIncorrectCount} times.
+          </p>
           <button className="submit-btn" type="submit" value="Submit">
             Submit your answer
           </button>

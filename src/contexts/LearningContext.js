@@ -1,8 +1,6 @@
-import React, { Component } from "react"
+import React, { Component } from "react";
 
 const initialState = {
-  words: [],
-  language: {},
   totalScore: 0,
   wordCorrectCount: 0,
   wordIncorrectCount: 0,
@@ -12,94 +10,77 @@ const initialState = {
   isCorrect: null,
   answer: null,
   error: null,
-  head: {}
-}
+};
 
 const LearningContext = React.createContext({
   ...initialState,
-  setError: () => { },
-  clearError: () => { },
+  setError: () => {},
+  clearError: () => {},
   setWordList: () => {},
   setLanguage: () => {},
-  setNextWord: () => { },
-  setTotalScore: () => { },
-  setWordCorrectCount: () => { },
-  setWordIncorrectCount: () => { },
-  setGuess: () => { },
-  setAnswer: () => { },
-  setIsCorrect: () => { },
-  reset: () => { },
-  setHead: () => { }
-})
+  setNextWord: () => {},
+  setTotalScore: () => {},
+  setWordCorrectCount: () => {},
+  setWordIncorrectCount: () => {},
+  setGuess: () => {},
+  setAnswer: () => {},
+  setIsCorrect: () => {},
+  reset: () => {},
+  setHead: () => {},
+});
 
-export default LearningContext
+export default LearningContext;
 
 export class LearningProvider extends Component {
   state = {
     ...initialState,
   };
 
-  setLanguage = (language) => {
-    this.setState({ language });
+  setError = (error) => {
+    this.setState({ error });
   };
-
-  setWordList = (words) => {
-    this.setState({ words });
-  };
-
-  setResults = (results) => {
-    this.setState({...results});
-  };
-
-  setError = error => {
-    this.setState({ error })
-  }
 
   clearError = () => {
-    this.setState({ error: null })
-  }
-
-  setTotalScore = totalScore => {
-    this.setState({ totalScore })
-  }
-
-  setWordCorrectCount = wordCorrectCount => {
-    this.setState({ wordCorrectCount })
-  }
-
-  setWordIncorrectCount = wordIncorrectCount => {
-    this.setState({ wordIncorrectCount })
-  }
-
-  setNextWord = nextWord => {
-    this.setState({ nextWord })
-  }
-
-  setHead = (head) => {
-    this.setState({ head });
+    this.setState({ error: null });
   };
 
-  setGuess = guess => {
-    this.setState({ guess })
-  }
+  setTotalScore = (totalScore) => {
+    this.setState({ totalScore });
+  };
 
-  setPrevWord = prevWord => {
-    this.setState({ prevWord })
-  }
+  setWordCorrectCount = (wordCorrectCount) => {
+    this.setState({ wordCorrectCount });
+  };
 
-  setIsCorrect = isCorrect => {
-    this.setState({ isCorrect })
-  }
+  setWordIncorrectCount = (wordIncorrectCount) => {
+    this.setState({ wordIncorrectCount });
+  };
 
-  setAnswer = answer => {
-    this.setState({ answer })
-  }
+  setNextWord = (nextWord) => {
+    this.setState({ nextWord });
+  };
+
+  setGuess = (guess) => {
+    this.setState({ guess });
+  };
+
+  setPrevWord = (prevWord) => {
+    this.setState({ prevWord });
+  };
+
+  setIsCorrect = (isCorrect) => {
+    this.setState({ isCorrect });
+  };
+
+  setAnswer = (answer) => {
+    this.setState({ answer });
+  };
 
   reset = () => {
     this.setState({
       ...initialState,
-    })
-  }
+    });
+  };
 
   render() {
     const value = {
@@ -113,9 +94,6 @@ export class LearningProvider extends Component {
       isCorrect: this.state.isCorrect,
       answer: this.state.answer,
       error: this.state.error,
-      language: this.state.language,
-      words: this.state.words,
-      head: this.state.head,
       // methods
       setError: this.setError,
       clearError: this.clearError,
@@ -129,14 +107,11 @@ export class LearningProvider extends Component {
       setAnswer: this.setAnswer,
       reset: this.reset,
       setHead: this.setHead,
-      setWordList: this.setWordList,
-      setLanguage: this.setLanguage,
-      setResults: this.setResults,
-    }
+    };
     return (
       <LearningContext.Provider value={value}>
         {this.props.children}
       </LearningContext.Provider>
-    )
+    );
   }
 }
