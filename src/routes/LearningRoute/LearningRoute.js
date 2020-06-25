@@ -46,6 +46,21 @@ class LearningRoute extends Component {
     </>
   }
 
+  renderFeedback=()=>{
+    return (
+      <section>
+        {this.context.isCorrect ? (
+          <h1>Correct!</h1>
+        ) : (
+          <>
+            <h1>Incorrect :(</h1>
+            <p>The answer was: {this.context.answer}</p>
+          </>
+        )}
+      </section>
+    )
+  }
+
   // onSubmit(e) {
   //   e.preventDefault();
   //   const value = e.target.guessInput.value;
