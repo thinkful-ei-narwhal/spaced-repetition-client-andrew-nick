@@ -9,24 +9,7 @@ class LearningRoute extends Component {
   static contextType = LearningContext;
 
   componentDidMount() {
-    this.context.reset();
-
-    LanguageApiService.getHead()
-      .then((head) => {
-        console.log("TESTING", head);
-        this.context.setTotalScore(head.totalScore);
-        this.context.setWordCorrectCount(head.wordCorrectCount);
-        this.context.setWordIncorrectCount(head.wordIncorrectCount);
-        this.context.setNextWord(head.nextWord);
-        this.context.setPrevWord(head.nextWord);
-      })
-      .catch((error) => {
-        if (error.error === "Unauthorized request") {
-          TokenService.clearAuthToken();
-          this.props.history.push("/login");
-        }
-        this.context.setError(error);
-      });
+    this.getNextWord(this.context, this.props.history);
   }
 
   onSubmit(e, context) {
@@ -47,12 +30,11 @@ class LearningRoute extends Component {
       .catch((err) => this.context.setError(err));
   }
 
-  onNextQuestion(context, history) {
+  getNextWord(context, history) {
     context.reset();
 
     LanguageApiService.getHead()
       .then((head) => {
-        console.log("TESTING", head);
         context.setTotalScore(head.totalScore);
         context.setWordCorrectCount(head.wordCorrectCount);
         context.setWordIncorrectCount(head.wordIncorrectCount);
@@ -76,7 +58,12 @@ class LearningRoute extends Component {
         <h1>Learning Page</h1>
         <section>
           {showQuestion && !error && <Question onSubmit={this.onSubmit} />}
-          {!showQuestion && !error && <Answer onNextQuestion={this.onNextQuestion} history={this.props.history} />}
+          {!showQuestion && !error && (
+            <Answer
+              onNextQuestion={this.getNextWord}
+              history={this.props.history}
+            />
+          )}
         </section>
       </main>
     );
