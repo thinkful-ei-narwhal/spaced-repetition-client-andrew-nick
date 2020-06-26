@@ -81,6 +81,7 @@ class LearningRoute extends Component {
                 required
                 placeholder="translation"
                 type="text"
+                autocomplete="off"
               />
             </div>
             <button className="basic-btn" type="submit">
