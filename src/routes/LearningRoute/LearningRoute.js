@@ -67,7 +67,7 @@ class LearningRoute extends Component {
         <section>
           <form className="LearnWordForm" onSubmit={this.onSubmit}>
             <div>{error && <p className="red">{error}</p>}</div>
-            <div className="guess-input">
+            <div className="guess-input form-field-container">
               <label
                 className="basic-label TranslateLabel"
                 htmlFor="learn-guess-input"
@@ -105,7 +105,7 @@ class LearningRoute extends Component {
               Good try, but not quite right :(
             </h2>
           )}
-          <p>
+          <p className="AnswerExplanation">
             The correct translation for <span>{prevWord}</span> was{" "}
             <span>{answer}</span> and you chose <span>{guess}</span>!
           </p>
