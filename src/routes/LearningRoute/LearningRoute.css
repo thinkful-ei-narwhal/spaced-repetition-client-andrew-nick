@@ -43,15 +43,5 @@
   margin: 2rem auto;
 }
 
-.DisplayFeedback__correct {
-  text-align: center;
-  margin: 2rem;
-  padding: 2rem;
-}
 
-.DisplayFeedback__incorrect {
-  text-align: center;
-  margin: 2rem;
-  padding: 1rem;
-}
 
