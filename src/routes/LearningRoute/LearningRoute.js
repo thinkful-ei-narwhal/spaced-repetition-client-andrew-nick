@@ -75,7 +75,7 @@ class LearningRoute extends Component {
                 What's the translation for this word?
               </label>
               <input
-                className="basic-input"
+                className="basic-input TranslateInput"
                 id="learn-guess-input"
                 name="guess"
                 required

@@ -21,3 +21,11 @@
   color: var(--color-dark);
   font-size: 1.5rem;
 }
+
+/* Media Queries */
+
+@media only screen and (min-width: 1000px) {
+  .AppName {
+    font-size: 5rem;
+  }
+}
