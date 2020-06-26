@@ -1,17 +1,13 @@
 import React, { Component } from "react";
 import LearningContext from "../../contexts/LearningContext";
 import LanguageApiService from "../../services/language-api-service";
-import Question from "../../components/Question/Question";
-import Answer from "../../components/Answer/Answer";
 import TokenService from "../../services/token-service";
-import './LearningRoute.css'
+import "./LearningRoute.css";
 
 class LearningRoute extends Component {
   static contextType = LearningContext;
   state = { error: null };
-  // componentDidMount() {
-  //   this.getNextWord(this.context, this.props.history);
-  // }
+
   componentDidMount() {
     this.context.reset();
 
@@ -53,72 +49,10 @@ class LearningRoute extends Component {
       });
   };
 
-  // onSubmit(e, context) {
-  //   e.preventDefault();
-  //   const value = e.target.guessInput.value;
-  //   e.target.guessInput.value = "";
-  //   LanguageApiService.postGuess(value)
-  //     .then((res) => {
-  //       console.log(res)
-  //       context.setGuess(value);
-  //       context.setAnswer(res.answer);
-  //       context.setIsCorrect(res.isCorrect);
-  //       context.setNextWord(res.nextWord);
-  //       context.setTotalScore(res.totalScore);
-  //       context.setWordCorrectCount(res.wordCorrectCount);
-  //       context.setWordIncorrectCount(res.wordIncorrectCount);
-  //       return;
-  //     })
-  //     .catch((err) => context.setError(err.error));
-  // }
-
   getNextWord = () => {
     this.context.setIsCorrect(null);
   };
 
-  // getNextWord(context, history) {
-  //   context.reset();
-  //
-  //   LanguageApiService.getHead()
-  //     .then((head) => {
-  //       context.setTotalScore(head.totalScore);
-  //       context.setWordCorrectCount(head.wordCorrectCount);
-  //       context.setWordIncorrectCount(head.wordIncorrectCount);
-  //       context.setNextWord(head.nextWord);
-  //       context.setPrevWord(head.nextWord);
-  //     })
-  //     .catch((error) => {
-  //       if (error.error === "Unauthorized request") {
-  //         TokenService.clearAuthToken();
-  //         history.push("/login");
-  //       }
-  //       context.setError(error.error);
-  //     });
-  // }
-
-  // render() {
-  //   const { error } = this.context;
-  //   const showQuestion = this.context.isCorrect === null;
-  //   console.log(this.context.totalScore);
-  //
-  //   return (
-  //     <main>
-  //       <h1>Learning Page</h1>
-  //       <section>
-  //         <div className="DisplayScore">
-  //           <p>Your total score is: <span>{this.context.totalScore}</span></p>
-  //         </div>
-  //         {showQuestion && !error && <Question onSubmit={this.onSubmit} />}
-  //         {!showQuestion && !error && (
-  //           <Answer
-  //             onNextQuestion={this.getNextWord}
-  //             history={this.props.history}
-  //           />
-  //         )}
-  //       </section>
-  //     </main>
-  //   );
-  // }
   renderForm() {
     const { error } = this.state;
     const { nextWord } = this.context;
@@ -127,14 +61,17 @@ class LearningRoute extends Component {
         <section>
           <div>
             <h2>Translate the word:</h2>
-            <span className="Word">'{nextWord}'</span>
+            <span className="Word">{nextWord}</span>
           </div>
         </section>
         <section>
           <form className="LearnWordForm" onSubmit={this.onSubmit}>
             <div>{error && <p className="red">{error}</p>}</div>
             <div className="guess-input">
-              <label className="basic-label TranslateLabel" htmlFor="learn-guess-input">
+              <label
+                className="basic-label TranslateLabel"
+                htmlFor="learn-guess-input"
+              >
                 What's the translation for this word?
               </label>
               <input
@@ -146,7 +83,9 @@ class LearningRoute extends Component {
                 type="text"
               />
             </div>
-            <button className="basic-btn" type="submit">Submit your answer</button>
+            <button className="basic-btn" type="submit">
+              Submit your answer
+            </button>
           </form>
         </section>
       </>
@@ -169,7 +108,9 @@ class LearningRoute extends Component {
             The correct translation for <span>{prevWord}</span> was{" "}
             <span>{answer}</span> and you chose <span>{guess}</span>!
           </p>
-          <button className="basic-btn" onClick={this.getNextWord}>Try another word!</button>
+          <button className="basic-btn" onClick={this.getNextWord}>
+            Try another word!
+          </button>
         </div>
       </section>
     );
