@@ -2,7 +2,6 @@
   border: 1px solid var(--color-dark);
   padding: 1rem;
   max-width: 75rem;
-  height: 60vh;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
