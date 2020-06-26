@@ -19,6 +19,8 @@ body {
   --color-light: papayawhip;
   --color-medium: #C5D86D;
   --color-dark: #1A1B41;
+  --color-correct: #0a6b0a;
+  --color-incorrect: #9b0808;
   --font-dark: #54494B;
 }
 

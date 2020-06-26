@@ -38,10 +38,10 @@ class DashboardRoute extends Component {
     return (
       <main>
         <section>
-          <h2>{language.name}</h2>
-          <span>Total correct answers: {language.total_score}</span>
-          <h3>Words to practice</h3>
-          <section>
+          <h2 className="LanguageName">{language.name}</h2>
+          <span className="UserTotal">Total correct answers: {language.total_score}</span>
+          <h3 className="WordsHeader">Words to practice</h3>
+          <section className="WordCardList">
             { error
               ? <p>There was and error, try again</p> 
               : words ?

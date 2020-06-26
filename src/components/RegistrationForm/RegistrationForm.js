@@ -83,7 +83,7 @@ class RegistrationForm extends Component {
           />
         </div>
         <footer>
-          <Button className="text-btn" type='submit'>
+          <Button className="outline-btn" type='submit'>
             Sign up
           </Button>
           {' '}

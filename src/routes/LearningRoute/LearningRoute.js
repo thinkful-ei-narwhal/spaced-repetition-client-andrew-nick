@@ -4,6 +4,7 @@ import LanguageApiService from "../../services/language-api-service";
 import Question from "../../components/Question/Question";
 import Answer from "../../components/Answer/Answer";
 import TokenService from "../../services/token-service";
+import './LearningRoute.css'
 
 class LearningRoute extends Component {
   static contextType = LearningContext;
@@ -126,17 +127,18 @@ class LearningRoute extends Component {
         <section>
           <div>
             <h2>Translate the word:</h2>
-            <span>{nextWord}</span>
+            <span className="Word">'{nextWord}'</span>
           </div>
         </section>
         <section>
           <form className="LearnWordForm" onSubmit={this.onSubmit}>
             <div>{error && <p className="red">{error}</p>}</div>
             <div className="guess-input">
-              <label htmlFor="learn-guess-input">
+              <label className="basic-label TranslateLabel" htmlFor="learn-guess-input">
                 What's the translation for this word?
               </label>
               <input
+                className="basic-input"
                 id="learn-guess-input"
                 name="guess"
                 required
@@ -144,7 +146,7 @@ class LearningRoute extends Component {
                 type="text"
               />
             </div>
-            <button type="submit">Submit your answer</button>
+            <button className="basic-btn" type="submit">Submit your answer</button>
           </form>
         </section>
       </>
@@ -167,7 +169,7 @@ class LearningRoute extends Component {
             The correct translation for <span>{prevWord}</span> was{" "}
             <span>{answer}</span> and you chose <span>{guess}</span>!
           </p>
-          <button onClick={this.getNextWord}>Try another word!</button>
+          <button className="basic-btn" onClick={this.getNextWord}>Try another word!</button>
         </div>
       </section>
     );
@@ -189,11 +191,11 @@ class LearningRoute extends Component {
         {showForm && (
           <footer>
             <div>
-              <p className="correct">
+              <p className="Correct">
                 You have answered this word correctly{" "}
                 <span>{this.context.wordCorrectCount}</span> times.
               </p>
-              <p className="incorrect">
+              <p className="Incorrect">
                 You have answered this word incorrectly{" "}
                 <span>{this.context.wordIncorrectCount}</span> times.
               </p>
